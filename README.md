@@ -35,6 +35,7 @@ A smart, AI-powered web application that analyzes resumes and provides personali
 ```bash
 git clone https://github.com/yourusername/ai-resume-analyzer.git
 cd ai-resume-analyzer
+```
 
 ### 📚 2. Install Dependencies
 
@@ -45,6 +46,7 @@ pip install -r requirements.txt
 pip install nltk
 pip install spacy==2.3.5
 pip install https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-2.3.1/en_core_web_sm-2.3.1.tar.gz
+```
 
 ### 🛠️ 3. Configure Database
 
@@ -58,6 +60,7 @@ pip install https://github.com/explosion/spacy-models/releases/download/en_core_
        password="your_password",
        database="your_database"
    )
+   ```
 
 ### 🚀 4. Run the Application
 
@@ -65,3 +68,4 @@ Open your terminal and run:
 
 ```bash
 streamlit run App.py
+```
