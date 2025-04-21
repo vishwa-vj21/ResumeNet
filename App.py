@@ -29,7 +29,6 @@ import base64,random
 import time,datetime
 #libraries to parse the resume pdf files
 from pyresparser import ResumeParser
-# from resume_parser import resumeparse
 from pdfminer3.layout import LAParams, LTTextBox
 from pdfminer3.pdfpage import PDFPage
 from pdfminer3.pdfinterp import PDFResourceManager
