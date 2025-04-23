@@ -38,6 +38,7 @@ import io,random
 from streamlit_tags import st_tags
 from PIL import Image
 import pymysql
+# import mysql.connector
 from Courses import ds_course,web_course,android_course,ios_course,uiux_course,resume_videos,interview_videos
 import pafy #for uploading youtube videos
 import plotly.express as px #to create visualisations at the admin session
@@ -100,12 +101,15 @@ def course_recommender(course_list):
     return rec_course
 
 
-
-
-
 #CONNECT TO DATABASE
+connection = pymysql.connect(
+    host='localhost',
+    port=3306,  # Optional if using default
+    user='root',
+    password='Vishwa@123',
+    database='cv'
+)
 
-connection = pymysql.connect(host='localhost',user='root',password='(Add your password)',db='cv')
 cursor = connection.cursor()
 
 def insert_data(name,email,res_score,timestamp,no_of_pages,reco_field,cand_level,skills,recommended_skills,courses):
@@ -128,7 +132,7 @@ def run():
     st.sidebar.markdown("# Choose User")
     activities = ["User", "Admin"]
     choice = st.sidebar.selectbox("Choose among the given options:", activities)
-    link = '[©Developed by Dr,Briit](https://www.linkedin.com/in/mrbriit/)'
+    link = '[©Developed by Vishwajith](https://www.linkedin.com/in/iamvishwajith)'
     st.sidebar.markdown(link, unsafe_allow_html=True)
 
 
@@ -361,8 +365,8 @@ def run():
         ad_user = st.text_input("Username")
         ad_password = st.text_input("Password", type='password')
         if st.button('Login'):
-            if ad_user == 'briit' and ad_password == 'briit123':
-                st.success("Welcome Dr Briit !")
+            if ad_user == 'vj2166' and ad_password == 'Vishwa@123':
+                st.success("Welcome Mr. Vishwajith !")
                 # Display Data
                 cursor.execute('''SELECT*FROM user_data''')
                 data = cursor.fetchall()
