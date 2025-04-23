@@ -38,6 +38,7 @@ import io,random
 from streamlit_tags import st_tags
 from PIL import Image
 import pymysql
+from pytube import YouTube
 # import mysql.connector
 from Courses import ds_course,web_course,android_course,ios_course,uiux_course,resume_videos,interview_videos
 import pafy #for uploading youtube videos
@@ -46,9 +47,14 @@ import nltk
 nltk.download('stopwords')
 
 
+# def fetch_yt_video(link):
+#     video = pafy.new(link)
+#     return video.title
+
 def fetch_yt_video(link):
-    video = pafy.new(link)
-    return video.title
+    yt = YouTube(link)
+    return yt.title
+
 
 def get_table_download_link(df,filename,text):
     """Generates a link allowing the data in a given panda dataframe to be downloaded
@@ -177,11 +183,11 @@ def run():
                 st.success("Hello "+ resume_data['name'])
                 st.subheader("**Your Basic info**")
                 try:
-                    st.text('Name: '+resume_data['name'])
-                    st.text('Email: ' + resume_data['email'])
-                    st.text('Contact: ' + resume_data['mobile_number'])
-                    st.text('Resume pages: '+str(resume_data['no_of_pages']))
-                except:
+                    st.text('Name : '+resume_data['name'])
+                    st.text('Email : ' + resume_data['email'])
+                    st.text('Contact : ' + resume_data['mobile_number'])
+                    st.text('Resume pages : '+str(resume_data['no_of_pages']))
+                except: 
                     pass
                 cand_level = ''
                 if resume_data['no_of_pages'] == 1:
@@ -189,7 +195,7 @@ def run():
                     st.markdown( '''<h4 style='text-align: left; color: #d73b5c;'>You are at Fresher level!</h4>''',unsafe_allow_html=True)
                 elif resume_data['no_of_pages'] == 2:
                     cand_level = "Intermediate"
-                    st.markdown('''<h4 style='text-align: left; color: #1ed760;'>You are at intermediate level!</h4>''',unsafe_allow_html=True)
+                    st.markdown('''<h4 style='text-align: left; color: #007FFF;'>You are at intermediate level!</h4>''',unsafe_allow_html=True)
                 elif resume_data['no_of_pages'] >=3:
                     cand_level = "Experienced"
                     st.markdown('''<h4 style='text-align: left; color: #fba171;'>You are at experience level!''',unsafe_allow_html=True)
@@ -221,7 +227,7 @@ def run():
                         recommended_skills = ['Data Visualization','Predictive Analysis','Statistical Modeling','Data Mining','Clustering & Classification','Data Analytics','Quantitative Analysis','Web Scraping','ML Algorithms','Keras','Pytorch','Probability','Scikit-learn','Tensorflow',"Flask",'Streamlit']
                         recommended_keywords = st_tags(label='### Recommended skills for you.',
                         text='Recommended skills generated from System',value=recommended_skills,key = '2')
-                        st.markdown('''<h4 style='text-align: left; color: #1ed760;'>Adding this skills to resume will boost🚀 the chances of getting a Job</h4>''',unsafe_allow_html=True)
+                        st.markdown('''<h4 style='text-align: left; color: #007FFF;'>Adding this skills to resume will boost🚀 the chances of getting a Job</h4>''',unsafe_allow_html=True)
                         rec_course = course_recommender(ds_course)
                         break
 
@@ -233,7 +239,7 @@ def run():
                         recommended_skills = ['React','Django','Node JS','React JS','php','laravel','Magento','wordpress','Javascript','Angular JS','c#','Flask','SDK']
                         recommended_keywords = st_tags(label='### Recommended skills for you.',
                         text='Recommended skills generated from System',value=recommended_skills,key = '3')
-                        st.markdown('''<h4 style='text-align: left; color: #1ed760;'>Adding this skills to resume will boost🚀 the chances of getting a Job💼</h4>''',unsafe_allow_html=True)
+                        st.markdown('''<h4 style='text-align: left; color: #007FFF;'>Adding this skills to resume will boost🚀 the chances of getting a Job💼</h4>''',unsafe_allow_html=True)
                         rec_course = course_recommender(web_course)
                         break
 
@@ -245,7 +251,7 @@ def run():
                         recommended_skills = ['Android','Android development','Flutter','Kotlin','XML','Java','Kivy','GIT','SDK','SQLite']
                         recommended_keywords = st_tags(label='### Recommended skills for you.',
                         text='Recommended skills generated from System',value=recommended_skills,key = '4')
-                        st.markdown('''<h4 style='text-align: left; color: #1ed760;'>Adding this skills to resume will boost🚀 the chances of getting a Job💼</h4>''',unsafe_allow_html=True)
+                        st.markdown('''<h4 style='text-align: left; color: #007FFF;'>Adding this skills to resume will boost🚀 the chances of getting a Job💼</h4>''',unsafe_allow_html=True)
                         rec_course = course_recommender(android_course)
                         break
 
@@ -257,7 +263,7 @@ def run():
                         recommended_skills = ['IOS','IOS Development','Swift','Cocoa','Cocoa Touch','Xcode','Objective-C','SQLite','Plist','StoreKit',"UI-Kit",'AV Foundation','Auto-Layout']
                         recommended_keywords = st_tags(label='### Recommended skills for you.',
                         text='Recommended skills generated from System',value=recommended_skills,key = '5')
-                        st.markdown('''<h4 style='text-align: left; color: #1ed760;'>Adding this skills to resume will boost🚀 the chances of getting a Job💼</h4>''',unsafe_allow_html=True)
+                        st.markdown('''<h4 style='text-align: left; color: #007FFF;'>Adding this skills to resume will boost🚀 the chances of getting a Job💼</h4>''',unsafe_allow_html=True)
                         rec_course = course_recommender(ios_course)
                         break
 
@@ -269,7 +275,7 @@ def run():
                         recommended_skills = ['UI','User Experience','Adobe XD','Figma','Zeplin','Balsamiq','Prototyping','Wireframes','Storyframes','Adobe Photoshop','Editing','Illustrator','After Effects','Premier Pro','Indesign','Wireframe','Solid','Grasp','User Research']
                         recommended_keywords = st_tags(label='### Recommended skills for you.',
                         text='Recommended skills generated from System',value=recommended_skills,key = '6')
-                        st.markdown('''<h4 style='text-align: left; color: #1ed760;'>Adding this skills to resume will boost🚀 the chances of getting a Job💼</h4>''',unsafe_allow_html=True)
+                        st.markdown('''<h4 style='text-align: left; color: #007FFF;'>Adding this skills to resume will boost🚀 the chances of getting a Job💼</h4>''',unsafe_allow_html=True)
                         rec_course = course_recommender(uiux_course)
                         break
 
@@ -285,31 +291,31 @@ def run():
                 resume_score = 0
                 if 'Objective' in resume_text:
                     resume_score = resume_score+20
-                    st.markdown('''<h5 style='text-align: left; color: #1ed760;'>[+] Awesome! You have added Objective</h4>''',unsafe_allow_html=True)
+                    st.markdown('''<h5 style='text-align: left; color: #007FFF;'>[+] Awesome! You have added Objective</h4>''',unsafe_allow_html=True)
                 else:
                     st.markdown('''<h5 style='text-align: left; color: #000000;'>[-] Please add your career objective, it will give your career intension to the Recruiters.</h4>''',unsafe_allow_html=True)
 
                 if 'Declaration'  in resume_text:
                     resume_score = resume_score + 20
-                    st.markdown('''<h5 style='text-align: left; color: #1ed760;'>[+] Awesome! You have added Delcaration/h4>''',unsafe_allow_html=True)
+                    st.markdown('''<h5 style='text-align: left; color: #007FFF;'>[+] Awesome! You have added Delcaration/h4>''',unsafe_allow_html=True)
                 else:
                     st.markdown('''<h5 style='text-align: left; color: #000000;'>[-] Please add Declaration. It will give the assurance that everything written on your resume is true and fully acknowledged by you</h4>''',unsafe_allow_html=True)
 
                 if 'Hobbies' or 'Interests'in resume_text:
                     resume_score = resume_score + 20
-                    st.markdown('''<h5 style='text-align: left; color: #1ed760;'>[+] Awesome! You have added your Hobbies</h4>''',unsafe_allow_html=True)
+                    st.markdown('''<h5 style='text-align: left; color: #007FFF;'>[+] Awesome! You have added your Hobbies</h4>''',unsafe_allow_html=True)
                 else:
                     st.markdown('''<h5 style='text-align: left; color: #000000;'>[-] Please add Hobbies. It will show your persnality to the Recruiters and give the assurance that you are fit for this role or not.</h4>''',unsafe_allow_html=True)
 
                 if 'Achievements' in resume_text:
                     resume_score = resume_score + 20
-                    st.markdown('''<h5 style='text-align: left; color: #1ed760;'>[+] Awesome! You have added your Achievements </h4>''',unsafe_allow_html=True)
+                    st.markdown('''<h5 style='text-align: left; color: #007FFF;'>[+] Awesome! You have added your Achievements </h4>''',unsafe_allow_html=True)
                 else:
                     st.markdown('''<h5 style='text-align: left; color: #000000;'>[-] Please add Achievements. It will show that you are capable for the required position.</h4>''',unsafe_allow_html=True)
 
                 if 'Projects' in resume_text:
                     resume_score = resume_score + 20
-                    st.markdown('''<h5 style='text-align: left; color: #1ed760;'>[+] Awesome! You have added your Projects</h4>''',unsafe_allow_html=True)
+                    st.markdown('''<h5 style='text-align: left; color: #007FFF;'>[+] Awesome! You have added your Projects</h4>''',unsafe_allow_html=True)
                 else:
                     st.markdown('''<h5 style='text-align: left; color: #000000;'>[-] Please add Projects. It will show that you have done work related the required position or not.</h4>''',unsafe_allow_html=True)
 
@@ -337,22 +343,22 @@ def run():
                               str(resume_data['no_of_pages']), reco_field, cand_level, str(resume_data['skills']),
                               str(recommended_skills), str(rec_course))
 
-
-                ## Resume writing video
+                # Bonus Resume Video
                 st.header("**Bonus Video for Resume Writing Tips💡**")
                 resume_vid = random.choice(resume_videos)
-                res_vid_title = fetch_yt_video(resume_vid)
-                st.subheader("✅ **"+res_vid_title+"**")
+                st.subheader("✅ **Great Resume Tips Video**")
                 st.video(resume_vid)
+
+                
 
 
 
                 ## Interview Preparation Video
                 st.header("**Bonus Video for Interview Tips💡**")
                 interview_vid = random.choice(interview_videos)
-                int_vid_title = fetch_yt_video(interview_vid)
-                st.subheader("✅ **" + int_vid_title + "**")
+                st.subheader("✅ **Great Interview Tips Video**")
                 st.video(interview_vid)
+
 
                 connection.commit()
             else:
@@ -380,21 +386,22 @@ def run():
                 query = 'select * from user_data;'
                 plot_data = pd.read_sql(query, connection)
 
-                ## Pie chart for predicted field recommendations
+               # Pie chart for predicted field recommendations
                 labels = plot_data.Predicted_Field.unique()
                 print(labels)
                 values = plot_data.Predicted_Field.value_counts()
                 print(values)
                 st.subheader("**Pie-Chart for Predicted Field Recommendation**")
-                fig = px.pie(df, values=values, names=labels, title='Predicted Field according to the Skills')
+                fig = px.pie(plot_data, values=values, names=labels, title='Predicted Field according to the Skills')
                 st.plotly_chart(fig)
 
-                ### Pie chart for User's👨‍💻 Experienced Level
+                # Pie chart for User's👨‍💻 Experienced Level
                 labels = plot_data.User_level.unique()
                 values = plot_data.User_level.value_counts()
                 st.subheader("**Pie-Chart for User's Experienced Level**")
-                fig = px.pie(df, values=values, names=labels, title="Pie-Chart📈 for User's👨‍💻 Experienced Level")
+                fig = px.pie(plot_data, values=values, names=labels, title="Pie-Chart📈 for User's👨‍💻 Experienced Level")
                 st.plotly_chart(fig)
+
 
 
             else:
