@@ -386,20 +386,22 @@ def run():
                 query = 'select * from user_data;'
                 plot_data = pd.read_sql(query, connection)
 
-               # Pie chart for predicted field recommendations
-                labels = plot_data.Predicted_Field.unique()
-                print(labels)
-                values = plot_data.Predicted_Field.value_counts()
-                print(values)
+                # Make sure there's no byte-type data
+                plot_data = plot_data.astype(str)
+                # Pie chart for predicted field recommendations
                 st.subheader("**Pie-Chart for Predicted Field Recommendation**")
-                fig = px.pie(plot_data, values=values, names=labels, title='Predicted Field according to the Skills')
+                field_counts = plot_data['Predicted_Field'].value_counts()
+                field_data = field_counts.reset_index()
+                field_data.columns = ['Field', 'Count']
+                fig = px.pie(field_data, names='Field', values='Count', title='Predicted Field according to the Skills')
                 st.plotly_chart(fig)
 
-                # Pie chart for User's👨‍💻 Experienced Level
-                labels = plot_data.User_level.unique()
-                values = plot_data.User_level.value_counts()
+                # Pie chart for User's Experienced Level
                 st.subheader("**Pie-Chart for User's Experienced Level**")
-                fig = px.pie(plot_data, values=values, names=labels, title="Pie-Chart📈 for User's👨‍💻 Experienced Level")
+                level_counts = plot_data['User_level'].value_counts()
+                level_data = level_counts.reset_index()
+                level_data.columns = ['Level', 'Count']
+                fig = px.pie(level_data, names='Level', values='Count', title="Pie-Chart📈 for User's👨‍💻 Experienced Level")
                 st.plotly_chart(fig)
 
 
