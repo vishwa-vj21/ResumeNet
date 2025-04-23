@@ -371,7 +371,7 @@ def run():
         ad_user = st.text_input("Username")
         ad_password = st.text_input("Password", type='password')
         if st.button('Login'):
-            if ad_user == 'vj2166' and ad_password == 'Vishwa@123':
+            if ad_user == 'vj21662' and ad_password == 'Vishwa@123':
                 st.success("Welcome Mr. Vishwajith !")
                 # Display Data
                 cursor.execute('''SELECT*FROM user_data''')
